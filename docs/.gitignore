@@ -1,0 +1,39 @@
+# Node modules
+node_modules/
+.env
+dist/
+out/
+
+# Build and dependency folders
+.cache/
+build/
+.vite/
+.vscode/
+
+# SQLite database
+*.sqlite
+*.sqlite3
+
+# Electron logs and compiled binaries
+*.log
+*.tsbuildinfo
+*.asar
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+*.test.*
+__tests__/
+
+# IDEs
+.idea/
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# Misc
+*.bak
+*.zip

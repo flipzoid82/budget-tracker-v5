@@ -51,7 +51,8 @@ cd budget-tracker-v5
 npm install
 npm run dev     # Start Vite dev server
 npm run electron  # Launch Electron app
+```
 
 Made with 💙 by [Joesh Bautista](https://github.com/flipzoid82)
 🧠 Licensed for personal use — license TBD
-```
+

@@ -35,7 +35,7 @@ Budget Tracker v5 is a local-first desktop application that helps users track mo
 ```
 budget-tracker-v5/
 ├── .docs/                           # ✅ Flow documentation files
-│   └── FLOW01_*.md                 # ...up to FLOW33
+│   └── FLOW01_*.md                 # ...up to FLOW27
 ├── public/
 │   └── index.html                  # Base HTML template
 ├── src/

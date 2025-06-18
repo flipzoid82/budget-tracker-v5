@@ -1,0 +1,1 @@
+// IncomePage.jsx - placeholder content

@@ -18,7 +18,7 @@ _A privacy-first, local-first budgeting app built with React, Electron, and love
 > To help users efficiently track their monthly income, expenses, and surplus—locally, privately, and with an interface that’s intuitive, minimal, and responsive.
 
 **Why This Exists:**  
-Joesh wants to build a budget tool from the ground up—not just to manage his own finances, but to create something practical and personal. Rather than relying on Mint, YNAB, or spreadsheets, this app is an opportunity to build a reliable, user-owned solution that aligns with his design standards and development goals.
+I wanted to build a budget tool from the ground up—not just to manage my own finances, but to create something practical and personal. Rather than relying on Mint, YNAB, or spreadsheets, this app is an opportunity to build a reliable, user-owned solution that aligns with my design standards and development goals.
 
 **Product Philosophy:**
 - 🛡 **Privacy-first (local data only)**

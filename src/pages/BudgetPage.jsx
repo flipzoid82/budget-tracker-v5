@@ -1,0 +1,1 @@
+// BudgetPage.jsx - placeholder content

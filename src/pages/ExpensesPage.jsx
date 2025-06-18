@@ -1,0 +1,1 @@
+// ExpensesPage.jsx - placeholder content

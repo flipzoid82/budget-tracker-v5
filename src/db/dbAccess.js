@@ -36,8 +36,68 @@ function copyMonthData(fromId, toId) {
   tx();
 }
 
+// Get all expenses for a month
+function getExpenses(monthId) {
+  return db.prepare("SELECT * FROM expenses WHERE monthId = ? ORDER BY dueDate").all(monthId);
+}
+
+// Add new expense
+function addExpense(data) {
+  const {
+    name,
+    amount,
+    dueDate,
+    paid,
+    paidDate,
+    confirmation,
+    url,
+    category,
+    monthId
+  } = data;
+
+  db.prepare(`
+    INSERT INTO expenses (
+      id, monthId, name, amount, dueDate,
+      paid, paidDate, confirmation, url, category
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(
+    uuidv4(),
+    monthId,
+    name,
+    amount,
+    dueDate,
+    paid ? 1 : 0,
+    paidDate || null,
+    confirmation || "",
+    url || "",
+    category
+  );
+}
+
+// Update an existing expense
+function updateExpense(id, updates) {
+  const fields = Object.keys(updates);
+  const values = Object.values(updates);
+
+  const setClause = fields.map(field => `${field} = ?`).join(", ");
+  const stmt = db.prepare(`UPDATE expenses SET ${setClause} WHERE id = ?`);
+
+  stmt.run(...values, id);
+}
+
+// Delete an expense
+function deleteExpense(id) {
+  db.prepare("DELETE FROM expenses WHERE id = ?").run(id);
+}
+
+
 module.exports = {
   createMonth,
   getAllMonths,
-  copyMonthData
+  copyMonthData,
+  // Expenses
+  getExpenses,
+  addExpense,
+  updateExpense,
+  deleteExpense,
 };

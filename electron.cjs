@@ -34,4 +34,24 @@ ipcMain.handle("copy-month-data", async (_event, { fromId, toId, copyIncome, cop
   return db.copyMonthData(fromId, toId, { copyIncome, copyExpenses });
 });
 
+// Expense: Get by month
+ipcMain.handle("get-expenses", async (_event, monthId) => {
+  return db.getExpenses(monthId);
+});
+
+// Expense: Add new
+ipcMain.handle("add-expense", async (_event, data) => {
+  return db.addExpense(data);
+});
+
+// Expense: Update existing
+ipcMain.handle("update-expense", async (_event, { id, updates }) => {
+  return db.updateExpense(id, updates);
+});
+
+// Expense: Delete
+ipcMain.handle("delete-expense", async (_event, id) => {
+  return db.deleteExpense(id);
+});
+
 app.whenReady().then(createWindow);

@@ -1,16 +1,26 @@
-// electron/preload.js
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("api", {
-  // Month Management
   getAllMonths: () => ipcRenderer.invoke("get-all-months"),
-  createMonth: (id) => ipcRenderer.invoke("create-month", id),
-  copyMonthData: (params) => ipcRenderer.invoke("copy-month-data", params),
+  getCategories:    () => ipcRenderer.invoke("get-categories"),
 
-  // Expenses
+  //Import methods:
+  importJsonBackup: () => ipcRenderer.invoke("import-json-backup"),
+
+  //Expense methods:
   getExpenses: (monthId) => ipcRenderer.invoke("get-expenses", monthId),
-  addExpense: (data) => ipcRenderer.invoke("add-expense", data),
-  updateExpense: ({ id, updates }) => ipcRenderer.invoke("update-expense", { id, updates }),
+  addExpense: (expense) => ipcRenderer.invoke("add-expense", expense),
   deleteExpense: (id) => ipcRenderer.invoke("delete-expense", id),
-  // (Future: add expenses, income, misc, etc.)
+  updateExpense: (expense) => ipcRenderer.invoke("update-expense", expense),
+
+  // Income methods:
+  getIncome: (monthId) => ipcRenderer.invoke("get-income", monthId),
+  addIncome: (income)   => ipcRenderer.invoke("add-income", income),
+  updateIncome: (income) => ipcRenderer.invoke("update-income", income),
+  deleteIncome: (id)     => ipcRenderer.invoke("delete-income", id),
+
+  // Dashboard methods:
+  getDashboardSummary: (monthId) =>     ipcRenderer.invoke("get-dashboard-summary", monthId),
+  getDashboardHistory: (options = { monthsCount: 6 }) => ipcRenderer.invoke("get-dashboard-history", options),
+  getUrgentBills: (options = { monthId: null, windowDays: 7 }) => ipcRenderer.invoke("get-urgent-bills", options),
 });

@@ -1,16 +1,35 @@
-// src/App.jsx
+// App.jsx
 import React from "react";
-import MonthSelector from "./components/budget/MonthSelector";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainLayout from "./components/MainLayout";
 
-function App() {
+import DashboardPage from "./pages/DashboardPage";
+import ExpensesPage from "./pages/ExpensesPage";
+import IncomePage from "./pages/IncomePage";
+import BudgetPage from "./pages/BudgetPage";
+import MiscPage from "./pages/MiscPage";
+import SettingsPage from "./pages/SettingsPage";
+
+import { MonthProvider } from "./context/MonthContext"; // ✅ Add this line
+
+const App = () => {
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>📅 Budget Tracker v5</h1>
-      <p>Select or create a month to begin.</p>
-
-      <MonthSelector />
-    </div>
+    <Router>
+      <MonthProvider> {/* ✅ Wrap app in Month context */}
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route index element={<DashboardPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/expenses" element={<ExpensesPage />} />
+            <Route path="/income" element={<IncomePage />} />
+            <Route path="/budget" element={<BudgetPage />} />
+            <Route path="/misc" element={<MiscPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+          </Route>
+        </Routes>
+      </MonthProvider>
+    </Router>
   );
-}
+};
 
 export default App;

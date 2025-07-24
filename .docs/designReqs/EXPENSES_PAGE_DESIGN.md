@@ -1,130 +1,88 @@
-# 💸 Expenses Page – Design Spec
+# 💸 Expenses Page – Design Spec (Revised)
 
 ## 🧠 Purpose
 
 The Expenses page is a dedicated workspace for tracking, managing, and reviewing all bill-related transactions for the selected month.
 
 It is the **core utility view** for:
-- Seeing what's due and what’s paid
+
+- Seeing what’s due and what’s paid
 - Taking action (mark paid, edit, delete)
 - Catching overdue bills
-- Managing recurring expenses
+- Managing categories toggle
 
 ---
 
 ## 🧱 Structure (Top to Bottom)
 
-### ✅ 1. Section Title
+### 1. Section Title
 
 ```
-💸 Expenses – JUN2025
+💸 Expenses – June 2025
 ```
 
-Dynamic heading with the selected month in uppercase.
+## Dynamic heading displaying the selected month in "MonthName Year" format.
+
+### 2. Toolbar (Below Title)
+
+| Element           | Description                                                                                 |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| `➕ Add Expense`  | Opens `PromptModal` to add a new expense record                                             |
+| `🔍 Search`       | Text input to search by **name** or **category name**                                       |
+| `Show Categories` | Checkbox to toggle visibility of category badges in the table fileciteturn25file3L3-L10 |
 
 ---
 
-### ✅ 2. Toolbar (Below Title)
+### 3. Expenses Table
 
-| Element | Description |
-|--------|-------------|
-| `➕ Add Expense` | Opens `PromptModal` to add a new bill |
-| `🧪 Seed Test Data` | (Dev-only) populates fake rows |
-| `🔍 Search` | Text field to search by name or category |
-| `↕️ Sort` | Dropdowns or clickable headers to sort by name, amount, or due date |
-
----
-
-### ✅ 3. Expenses Table
-
-Columns:
-
+Rendered by **ExpenseTable.jsx**.
 | Column | Description |
-|--------|-------------|
-| Name | Name of the expense (e.g., Rent, Netflix) |
-| Amount | Dollar value |
-| Due Date | When it’s due |
-| Status | "✅ Paid" or "❌ Unpaid" |
-| Category | E.g. Utility, Housing, Subscription |
-| Actions | Buttons: 💵 mark paid/unpaid, ✏️ edit, 🗑️ delete |
+|----------------|--------------------------------------------------------------------------------------------------------|
+| **Actions** | Dropdown (`DropdownMenu`) with options: Mark Paid (or Unpaid), Edit, Delete via hamburger icon |
+| **Name** | Expense name (link if URL) with inline `<CategoryBadge>` when enabled |
+| **Amount** | Dollar value formatted to two decimals (`$x.xx`) |
+| **Due Date** | Date when the expense is due (MM/DD/YYYY) |
+| **Paid Date** | Date when paid (`–` if unpaid) |
+| **Confirmation**| Confirmation text (or `–` if none) |
+
+- **Row Styling**: Tinted background—green for paid (`.row-paid`), red for unpaid (`.row-unpaid`)—plus zebra-striping for even/odd rows.
 
 ---
 
-### ✅ 4. Row Actions
+## 🔄 CRUD & Modals
 
-| Button | Action |
-|--------|--------|
-| 💵 | Mark as Paid / Undo Paid (via `PromptModal` or `WarningModal`) |
-| ✏️ | Edit expense name/category (via `PromptModal`) |
-| 🗑️ | Delete with confirmation (`WarningModal`) |
-
----
-
-## 🧮 Summary + Insights Panel
-
-Located below the expenses table, this section provides high-level metrics and smart suggestions:
-
-### 🔢 Initial Metrics
-
-- **💰 Total Expenses:** Sum of all expenses for the current month  
-  Example: `$2,453.23`
-
-### 🔮 Future-Ready Enhancements
-
-| Feature | Description |
-|--------|-------------|
-| 📈 **Price Change Detection** | Show ▲ increase or ▼ decrease vs. prior month for recurring expenses |
-| 🔁 **Recurring Expense Tag** | Identify and optionally filter recurring bills |
-| 📊 **Category Breakdown Preview** | Small horizontal bar or pie chart for category weights |
-| 🧮 **Avg Spend (last 3 months)** | Running average per month |
-| ⏱️ **Longest Unpaid** | Oldest unpaid bill due |
-| 🧾 **Export Tools** | Export expense table to CSV or PDF |
-| 🔍 **Search/Filter** | Real-time search by name/category |
-| ↕️ **Sort** | Sort by due date, amount, or name (ascending/descending)
+- **Add/Edit**: `PromptModal` with fields: Name, Amount, Due Date, Category (select), URL, Paid Date (optional), Confirmation (optional)
+- **Mark Paid**: `PromptModal` to set Paid Date and Confirmation; toggles paid flag on submit.
+- **Mark Unpaid**: `WarningModal` with warning about clearing Paid Date & Confirmation.
+- **Delete**: `WarningModal` to confirm deletion.
 
 ---
 
 ## 📐 Layout & Styling
 
-- Responsive horizontal scrolling for long tables
-- Actions right-aligned in each row
-- Minimal borders; clean hover effect
-- CSS file: `expenses.css` or `ExpenseList.module.css`
-- Dark mode compatible
+- Responsive horizontal scrolling for wide tables (`.table-responsive` in `DataTable.css`)
+- CSS Files:
+  - `ExpensesPage.css`
+  - `ExpenseTable.css`
+  - `DataTable.css`
+  - `CategoryBadge.css`
+  - `DropdownMenu.css`
+- Dark mode compatible.
 
 ---
 
 ## 🔁 Behavior
 
-| Trigger | Response |
-|--------|----------|
-| Switch month | Load only that month's expenses |
-| Add/Delete/Edit/Mark Paid | Auto-refresh list |
-| Marked as Paid | Updates dashboard and removes from unpaid pool |
-| Overdue items | Tracked but displayed in Dashboard only |
+| Trigger                   | Response                              |
+| ------------------------- | ------------------------------------- |
+| Switch month              | Load that month’s expenses            |
+| Add/Edit/Delete/Mark Paid | Auto-refresh list, update row styling |
+| Search input              | Filters rows live                     |
 
 ---
 
 ## 🔒 Data Dependencies
 
-- Query: `expenses WHERE monthId = ?`
-- Metrics:
-  - Overdue = `dueDate < today && !paid`
-  - Unpaid = `paid == false`
-  - Total = SUM(`amount`)
-
----
-
-## ✅ Recap Summary
-
-| Feature | Status |
-|--------|--------|
-| Section title | ✅ |
-| Add expense modal | ✅ |
-| Table with full list | ✅ |
-| Row actions: edit/delete/paid | ✅ |
-| Summary totals | ✅ |
-| Future: price changes, recurring flag, export | ✅ |
-| Sort + Filter support (post-scaffold) | ✅ |
-| Responsive layout | ✅ |
-| Modular modals & clean UX | ✅ |
+- Query: `SELECT * FROM expenses WHERE monthId = ?`
+- Data derived: paid flag (`0|1`), paidDate, confirmation, categoryId.
+- Filtering: client-side search by name and category name.

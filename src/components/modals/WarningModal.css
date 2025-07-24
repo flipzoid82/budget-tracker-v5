@@ -1,0 +1,74 @@
+/* Reuse the same backdrop */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Slightly smaller box for warnings */
+.modal-content {
+  background: var(--bg-color);
+  padding: 1.5rem;
+  border-radius: 6px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Warning text */
+.modal-content p {
+  margin: 0 0 1.5rem;
+  font-size: 1rem;
+}
+
+/* Yes/No buttons */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem; 
+}
+
+/* center the warning icon above the message */
+.modal-content .modal-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.modal-content .modal-icon svg {
+  width: 3rem;                            /* your preferred size */
+  height: 3rem;
+  color: var(--danger-color, #f44336);    /* sets the SVG’s currentColor */
+  /* if you want an outline/stroke: */
+  stroke: var(--danger-outline, #000);
+  stroke-width: 5px;
+}
+
+/* default (danger) = red */
+.modal-danger .modal-icon svg {
+  fill: var(--danger-color, #f44336);
+}
+
+/* warning = amber/yellow */
+.modal-warning .modal-icon svg {
+  fill: var(--warning-color, #ff9800);
+}
+
+/* info = blue */
+.modal-info .modal-icon svg {
+  fill: var(--info-color, #2196f3);
+}
+
+/* You can also tint the modal border or heading if desired */
+.modal-warning .modal-content {
+  border-top: 4px solid var(--warning-color, #ff9800);
+}

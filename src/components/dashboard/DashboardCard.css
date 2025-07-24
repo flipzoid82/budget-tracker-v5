@@ -1,0 +1,47 @@
+/* src/components/dashboard/DashboardCard.css */
+
+.dashboard-card {
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid;                   /* border-color set by variant */
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.dashboard-card__label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-card__value {
+  font-size: 1.5rem;
+}
+
+/* Positive (Income, Surplus ≥0) */
+.dashboard-card--positive {
+  background-color: rgba(76, 175, 80, 0.15);   /* light green */
+  border-color: #4caf50;                       /* green border */
+  color: #2e7d32;                              /* dark green text */
+}
+
+/* Negative (Expenses, Unpaid >0, Surplus <0) */
+.dashboard-card--negative {
+  background-color: rgba(229, 57, 53, 0.15);   /* light red */
+  border-color: #e53935;                       /* red border */
+  color: #c62828;                              /* dark red text */
+}
+
+/* Neutral (Unpaid = 0, or other) */
+.dashboard-card--neutral {
+  background-color: rgba(33, 150, 243, 0.1);   /* light blue */
+  border-color: #2196f3;                       /* blue border */
+  color: #1565c0;                              /* dark blue text */
+}
+
+.dashboard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}

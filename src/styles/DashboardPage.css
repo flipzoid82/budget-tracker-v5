@@ -1,0 +1,43 @@
+/* Summary box around the cards */
+.dashboard-page__summary {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Remove link underline & make cards clickable */
+.card-link {
+  display: block;
+  text-decoration: none;
+}
+.card-link .dashboard-card {
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.card-link .dashboard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.dashboard-page__cards {
+  display: grid;
+  /* exactly four equal columns */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Activities in a tight grid */
+.dashboard-page__activities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Optional: reduce bottom margin in each card for compactness */
+.dashboard-activity-card {
+  margin-bottom: 0; 
+}

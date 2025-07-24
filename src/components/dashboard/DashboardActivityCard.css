@@ -1,0 +1,34 @@
+/* src/components/dashboard/DashboardActivityCard.css */
+.dashboard-activity-card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-light);
+  margin-bottom: 1.5rem;
+}
+.activity-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.activity-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.activity-toggle {
+  background: none;
+  border: none;
+  color: var(--accent-positive);
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+.activity-toggle:hover {
+  text-decoration: underline;
+}

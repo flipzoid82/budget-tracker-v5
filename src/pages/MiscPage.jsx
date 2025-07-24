@@ -1,0 +1,1 @@
+const MiscPage = () => <h1>Misc</h1>; export default MiscPage;

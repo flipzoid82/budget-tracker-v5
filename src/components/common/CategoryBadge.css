@@ -1,0 +1,12 @@
+/* src/components/common/CategoryBadge.css */
+.category-badge {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  color: white;              /* text always white for contrast */
+  border-radius: 0.25rem;
+  text-transform: capitalize;
+}

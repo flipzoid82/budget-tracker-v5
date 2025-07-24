@@ -1,7 +1,10 @@
-// electron/electron.cjs
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow } = require("electron");
 const path = require("path");
-const db = require("./src/db/dbAccess");
+const { migrate } = require("./schema"); 
+
+// Load IPC handlers
+require("./ipc/dbHandlers");
+require("./ipc/importJsonBackup");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -17,21 +20,7 @@ function createWindow() {
   win.loadURL("http://localhost:5173");
 }
 
-// === IPC HANDLERS ===
-
-// Get all months from DB
-ipcMain.handle("get-all-months", async () => {
-  return db.getAllMonths();
+app.whenReady().then(() => {
+  migrate();      // ✅ Initialize DB schema
+  createWindow(); // ✅ Launch app window
 });
-
-// Create new blank month
-ipcMain.handle("create-month", async (_event, id) => {
-  return db.createMonth(id);
-});
-
-// Copy income/expenses to new month
-ipcMain.handle("copy-month-data", async (_event, { fromId, toId, copyIncome, copyExpenses }) => {
-  return db.copyMonthData(fromId, toId, { copyIncome, copyExpenses });
-});
-
-app.whenReady().then(createWindow);

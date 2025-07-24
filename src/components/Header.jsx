@@ -1,1 +1,0 @@
-// Header.jsx - placeholder content

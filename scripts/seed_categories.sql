@@ -1,0 +1,12 @@
+INSERT OR IGNORE INTO categories (id, name) VALUES ('benefits', 'Benefits');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('debt', 'Debt');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('entertainment', 'Entertainment');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('fees', 'Fees');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('insurance', 'Insurance');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('miscellaneous', 'Miscellaneous');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('mortgage', 'Mortgage');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('rent', 'Rent');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('salary', 'Salary');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('savings', 'Savings');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('uncategorized', 'Uncategorized');
+INSERT OR IGNORE INTO categories (id, name) VALUES ('utilities', 'Utilities');

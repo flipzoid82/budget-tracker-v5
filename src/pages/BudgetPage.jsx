@@ -1,1 +1,1 @@
-// BudgetPage.jsx - placeholder content
+const BudgetPage = () => <h1>Budget</h1>; export default BudgetPage;

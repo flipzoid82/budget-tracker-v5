@@ -5,7 +5,7 @@ import DataTable from "./DataTable";
 import DropdownMenu from "../common/DropdownMenu";
 import IconHamburgerMenu from "../../icons/IconHamburgerMenu";
 import CategoryBadge from "../common/CategoryBadge";
-import { formatMDY } from "../../utils/formatters";
+import { formatMDY } from "../../utils/formatters.mjs";
 
 export default function IncomeTable({
   data = [],

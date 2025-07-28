@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useMonthContext } from "../context/MonthContext";
 import { useExpenses }     from "../hooks/useExpenses";
 import { useCategories }   from "../hooks/useCategories";
-import { formatMonthId }   from "../utils/formatters";
+import { formatMonthId }   from "../utils/formatters.mjs";
 import ExpenseTable        from "../components/tables/ExpenseTable";
 import PromptModal         from "../components/modals/PromptModal";
 import WarningModal        from "../components/modals/WarningModal";
@@ -97,7 +97,7 @@ export default function ExpensesPage() {
       <h1>💸 Expenses – {formatMonthId(monthId)}</h1>
 
       <div className="expenses-toolbar">
-        <button onClick={() => setModal({ type: "add" })}>➕ Add Expense</button>
+        <button onClick={() => setModal({ type: "add" })}>✚ Add Expense</button>
         <input
           type="text"
           placeholder="🔍 Search name or category"

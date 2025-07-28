@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useMonthContext } from "../context/MonthContext";
 import useIncome from "../hooks/useIncome";
 import { useCategories } from "../hooks/useCategories";
-import { formatMonthId } from "../utils/formatters";
+import { formatMonthId } from "../utils/formatters.mjs";
 import IncomeTable from "../components/tables/IncomeTable";
 import PromptModal from "../components/modals/PromptModal";
 import WarningModal from "../components/modals/WarningModal";
@@ -75,7 +75,7 @@ export default function IncomePage() {
       <h1>💰 Income — {formatMonthId(monthId)}</h1>
 
       <div className="income-toolbar">
-        <button onClick={openAdd}>➕ Add Income</button>
+        <button onClick={openAdd}>✚ Add Income</button>
         <input
           type="text"
           placeholder="🔍 Search source or date"

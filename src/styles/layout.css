@@ -24,3 +24,61 @@
   justify-content: flex-end;
   margin-bottom: 1rem;
 }
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* New-Month button styles (shared) */
+.new-month-button {
+  padding: 0.5rem 1rem;
+  background-color: #e6e7e8;
+  border: none;
+  color: #000;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-month-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.new-month-button:hover {
+  background-color: #bec9d5;    /* hover light gray */
+}
+
+/* Delete-Month button—currently unstyled past hover/focus */
+.delete-month-button {
+  padding: 0.5rem 1rem;
+  background-color: #e6e7e8;    /* your standard button gray */
+  border: none;
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-month-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.delete-month-button:hover {
+  background-color: rgba(220, 53, 69, 0.1);    /* hover light gray */
+}
+
+.delete-month-button:focus {
+  outline: 2px solid #050505;    /* or your focus color */
+  outline-offset: 2px;
+}

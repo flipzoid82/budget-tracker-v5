@@ -1,7 +1,7 @@
 // src/components/MonthSelector.jsx
 import React from "react";
 import { useMonthContext } from "../context/MonthContext";
-import { formatMonthId } from "../utils/formatters"; // helper for "JUL 2025" etc.
+import { formatMonthId } from "../utils/formatters.mjs";
 
 const MonthSelector = () => {
   const { monthId, setMonthId, availableMonths, loading } = useMonthContext();

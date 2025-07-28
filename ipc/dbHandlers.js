@@ -1,8 +1,9 @@
 // ipc/dbHandlers.js
-const { ipcMain } = require("electron");
-const db          = require("./db");  // your shared better-sqlite3 connection
-// Built-in Node API to generate RFC-4122 UUIDs
-const { randomUUID } = require("crypto");
+const { ipcMain }    = require("electron");
+const db             = require("./db");  // your shared better-sqlite3 connection
+const { randomUUID } = require("crypto"); // Built-in Node API to generate RFC-4122 UUIDs
+const path              = require("path");
+const { pathToFileURL } = require("url");
 
 // ——————————————————————————————————————————————————————
 // Months
@@ -13,6 +14,129 @@ ipcMain.handle("get-all-months", () => {
     .prepare("SELECT id FROM months ORDER BY id DESC")
     .all();
   return rows.map(r => r.id).filter(Boolean);
+});
+
+// ——————————————————————————————————————————————————————
+// New: Create Month (blank or clone)
+// ——————————————————————————————————————————————————————
+ipcMain.handle("create-month", async (_, { monthId, mode, cloneOpts }) => {
+  // dynamically load the ESM helpers from src/utils
+  const fmtMod  = await import(pathToFileURL(path.resolve(__dirname, "../src/utils/formatters.mjs")).href);
+  const dateMod = await import(pathToFileURL(path.resolve(__dirname, "../src/utils/dates.mjs")).href);
+  const { formatMonthId }  = fmtMod;
+  const { createSafeDate } = dateMod;
+  const createdAt = Date.now();
+  const label = formatMonthId(monthId);
+
+  const txn = db.transaction(() => {
+    // 1) Insert the new month row with label
+    db.prepare(`
+      INSERT OR IGNORE INTO months (id, label, createdAt)
+      VALUES (?, ?, ?)
+    `).run(monthId, label, createdAt);
+
+    if (mode === "clone") {
+      const { from: srcMonth, income: doIncome, expenses: doExpenses } = cloneOpts;
+
+      // 2) Clone Income
+      if (doIncome) {
+        const incRows = db.prepare(`SELECT * FROM income WHERE monthId = ?`).all(srcMonth);
+        const insInc  = db.prepare(`
+          INSERT INTO income
+            (id, monthId, source, amount, dateReceived, notes, categoryId)
+          VALUES
+            (@newId, @monthId, @source, @amount, @dateReceived, @notes, @categoryId)
+        `);
+
+        incRows.forEach(r => {
+          // preserve day, swap year/month safely
+          const [origYear, origMon, origDay] = r.dateReceived.split("-");
+          const [newYear, newMon] = monthId.split("-");
+          const newDate = createSafeDate(
+            parseInt(newYear, 10),
+            parseInt(newMon, 10),
+            parseInt(origDay, 10)
+          ).toISOString().slice(0, 10);
+
+          insInc.run({
+            newId:       randomUUID(),
+            monthId,
+            source:      r.source,
+            amount:      r.amount,
+            dateReceived: newDate,
+            notes:       r.notes,
+            categoryId:  r.categoryId
+          });
+        });
+      }
+
+      // 3) Clone Expenses
+      if (doExpenses) {
+        const expRows = db.prepare(`SELECT * FROM expenses WHERE monthId = ?`).all(srcMonth);
+        const insExp  = db.prepare(`
+          INSERT INTO expenses
+            (id, monthId, name, amount, dueDate,
+             paid, paidDate, confirmation, url, categoryId)
+          VALUES
+            (@newId, @monthId, @name, @amount, @dueDate,
+             0, NULL, NULL, NULL, @categoryId)
+        `);
+
+        expRows.forEach(r => {
+          const [origYear, origMon, origDay] = r.dueDate.split("-");
+          const [newYear, newMon] = monthId.split("-");
+          const newDue = createSafeDate(
+            parseInt(newYear, 10),
+            parseInt(newMon, 10),
+            parseInt(origDay, 10)
+          ).toISOString().slice(0, 10);
+
+          insExp.run({
+            newId:      randomUUID(),
+            monthId,
+            name:       r.name,
+            amount:     r.amount,
+            dueDate:    newDue,
+            categoryId: r.categoryId
+          });
+        });
+      }
+    }
+  });
+
+  // execute transaction and return success
+  try {
+    txn();
+    return { success: true };
+  } catch (err) {
+    console.error("create-month failed:", err);
+    return { success: false, error: err.message };
+  }
+});
+
+ // ——————————————————————————————————————————————————————
+ // New: Delete Month + all related data
+ // ——————————————————————————————————————————————————————
+ipcMain.handle("delete-month", async (_, monthId) => {
+  const txn = db.transaction(() => {
+    //Future implementations
+    //db.prepare(`DELETE FROM budgets WHERE monthId = ?`).run(monthId); 
+    //db.prepare(`DELETE FROM misc WHERE monthId = ?`).run(monthId);
+    
+    // delete child rows first
+    db.prepare(`DELETE FROM income WHERE monthId = ?`).run(monthId);
+    db.prepare(`DELETE FROM expenses WHERE monthId = ?`).run(monthId);
+    // then delete the month record itself
+    db.prepare(`DELETE FROM months WHERE id = ?`).run(monthId);
+  });
+
+  try {
+    txn();
+    return { success: true };
+  } catch (err) {
+    console.error("delete-month failed:", err);
+    return { success: false, error: err.message };
+  }
 });
 
 // ——————————————————————————————————————————————————————

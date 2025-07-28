@@ -6,7 +6,7 @@ import useDashboardData from "../hooks/useDashboardData";
 import DashboardCard from "../components/dashboard/DashboardCard";
 import DashboardTrendChart from "../components/dashboard/DashboardTrendChart";
 import DashboardActivityCard from "../components/dashboard/DashboardActivityCard";
-import { formatMonthId } from "../utils/formatters";
+import { formatMonthId } from "../utils/formatters.mjs";
 import "../styles/DashboardPage.css";
 
 export default function DashboardPage() {

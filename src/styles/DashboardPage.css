@@ -1,10 +1,10 @@
 /* Summary box around the cards */
 .dashboard-page__summary {
-  background: var(--card-bg);
+  background: var(--color-surface);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 2rem;
+  padding: var(--space-md);
+  margin-bottom: var(--space-xl);
 }
 
 /* Remove link underline & make cards clickable */
@@ -25,16 +25,16 @@
   display: grid;
   /* exactly four equal columns */
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 /* Activities in a tight grid */
 .dashboard-page__activities {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
 }
 
 /* Optional: reduce bottom margin in each card for compactness */

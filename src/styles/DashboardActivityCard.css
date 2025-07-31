@@ -1,0 +1,38 @@
+.dashboard-activity-card {
+  background: var(--color-surface);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.activity-title {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--font-size-xl);
+}
+
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xxs);
+}
+
+.activity-toggle {
+  background: none;
+  border: none;
+  color: var(--color-success);
+  cursor: pointer;
+  font-weight: var(--font-weight-bold);
+  margin-top: var(--space-xs);
+}
+
+.activity-toggle:hover {
+  text-decoration: underline;
+}

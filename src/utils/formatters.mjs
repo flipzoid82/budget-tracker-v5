@@ -1,4 +1,4 @@
-// utils/formatters.js
+// src/utils/formatters.js
 export const formatMonthId = (id) => {
   if (!id || typeof id !== "string") return "";
   
@@ -18,9 +18,9 @@ export const formatMonthId = (id) => {
   if (isNaN(date.getTime())) return "";
 
   return date.toLocaleString("default", {
-    month: "short",
+    month: "long",
     year: "numeric",
-  }).toUpperCase();
+  });
 };
 
 /**

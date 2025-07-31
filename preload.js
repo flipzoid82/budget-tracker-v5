@@ -4,6 +4,12 @@ contextBridge.exposeInMainWorld("api", {
   getAllMonths: () => ipcRenderer.invoke("get-all-months"),
   getCategories:    () => ipcRenderer.invoke("get-categories"),
 
+  //Create New Month:
+  createMonth: (opts) => ipcRenderer.invoke("create-month", opts),
+
+  // Delete Month
+  deleteMonth:       monthId  => ipcRenderer.invoke("delete-month", monthId),
+
   //Import methods:
   importJsonBackup: () => ipcRenderer.invoke("import-json-backup"),
 

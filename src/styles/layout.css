@@ -1,26 +1,103 @@
+/* Theme & core utilities */
+@import "./theme.css";
+@import "./utilities.css";
+
+/* Component module styles */
+@import "./CategoryBadge.css";
+@import "./DropdownMenu.css";
+@import "./DashboardCard.css";
+@import "./DashboardActivityCard.css";
+@import "./DashboardTrendChart.css";
+@import "./DashboardPage.css";
+@import "./ExpensesPage.css";
+@import "./IncomePage.css";
+@import "./DataTable.css";
+@import "./NewMonthModal.css";
+@import "./PromptModal.css";
+@import "./WarningModal.css";
+@import "./toast.css";
+
 .app-layout {
   display: flex;
   height: 100vh;
 }
 .sidebar {
-  width: 200px;
-  background-color: #eee;
-  padding: 1rem;
+  width: var(--sidebar-width, 200px);
+  background-color: var(--color-bg);
+  padding: var(--space-md);
 }
 .sidebar ul {
   list-style: none;
   padding: 0;
 }
 .sidebar li {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 .content {
   flex-grow: 1;
-  padding: 1rem;
+  padding: var(--space-md);
 }
 .toolbar {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-md);
   justify-content: flex-end;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+/* New-Month button styles (shared) */
+.new-month-button {
+  padding: var(--space-xs) var(--space-md);
+  background-color: var(--btn-bg);
+  border: none;
+  color: var(--btn-text);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-month-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.new-month-button:hover {
+  background-color: var(--btn-hover-bg);
+}
+
+/* Delete-Month button—currently unstyled past hover/focus */
+.delete-month-button {
+  padding: var(--space-xs) var(--space-md);
+  background-color: var(--btn-bg);    /* your standard button gray */
+  border: none;
+  color: var(--btn-text);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-month-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.delete-month-button:hover {
+  background-color: var(--btn-danger-hover-bg)    /* hover light gray */
+}
+
+.delete-month-button:focus {
+  outline: 2px solid var(--focus-outline-color);    /* or your focus color */
+  outline-offset: 2px;
 }

@@ -1,0 +1,11 @@
+.category-badge {
+  display: inline-block;
+  margin-right: var(--space-xs);
+  padding: var(--space-xxs) var(--space-xs);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: white;              /* text always white for contrast */
+  border-radius: var(--radius-sm);
+  text-transform: capitalize;
+}

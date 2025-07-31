@@ -1,0 +1,122 @@
+/* Responsive wrapper for wide tables */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto; /* Responsive horizontal scrolling */ 
+}
+
+/* Core table styling */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--table-bg);
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+/* Header row */
+.data-table th {
+  background: var(--table-header-bg);
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Row hover */
+.data-table tbody tr:hover {
+  background: var(--table-hover-bg);
+}
+
+/* collapse the very last column (where the hamburger lives) */
+.data-table th:last-child,
+.data-table td:last-child {
+  /* force minimal, content-based width */
+  width: 1%;
+  white-space: nowrap;
+}
+
+/* Shrink padding on the first (hamburger) column */
+.data-table th:first-child,
+.data-table td:first-child {
+  /* replace the 1rem horizontal padding with something smaller */
+  padding-left: var(--space-xs);
+  padding-right: var(--space-xxs);
+}
+
+/* Pull the “Name” column in toward the hamburger */
+.data-table th:nth-child(2),
+.data-table td:nth-child(2) {
+  /* remove most of the left padding */
+  padding-left: var(--space-xxs);
+}
+
+/* --- Paid / Unpaid Indicator --- */
+
+/* light green for paid rows */
+.data-table tbody tr.row-paid {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+/* light red for unpaid rows */
+.data-table tbody tr.row-unpaid {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* preserve hover state—darker tint on hover */
+.data-table tbody tr:hover.row-paid {
+  background-color: rgba(76, 175, 80, 0.15);
+}
+.data-table tbody tr:hover.row-unpaid {
+  background-color: rgba(244, 67, 54, 0.15);
+}
+
+/* make headers clickable and align icon/text */
+.data-table th.sortable {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  position: relative;
+}
+
+.data-table th.sortable:hover {
+  background-color: var(--table-hover-bg);
+}
+
+.data-table th.sortable:active {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.data-table th.sortable:hover .th-content {
+  text-decoration: underline;
+}
+
+.data-table th .th-content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xxs);
+  width: 100%;
+}
+
+.data-table th .sort-icon {
+  width: var(--space-sm);
+  height: var(--space-sm);
+  /* inherit currentColor */
+}
+
+/* ensure the hamburger column is a fixed width */
+.data-table th:first-child,
+.data-table td:first-child {
+  width: 3rem;
+  max-width: 3rem;
+}
+
+.data-table tbody tr.row-even {
+  background-color: var(--row-even-bg, #fafafa);
+}
+
+.data-table tbody tr.row-odd {
+  background-color: var(--row-odd-bg, #fff);
+}

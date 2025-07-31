@@ -1,0 +1,32 @@
+/* Spacing Utilities */
+.u-p-xxs { padding: var(--space-xxs) !important; }
+.u-p-xs  { padding: var(--space-xs)  !important; }
+.u-p-sm  { padding: var(--space-sm)  !important; }
+.u-p-md  { padding: var(--space-md)  !important; }
+.u-p-lg  { padding: var(--space-lg)  !important; }
+.u-p-xl  { padding: var(--space-xl)  !important; }
+.u-m-sm  { margin:  var(--space-sm)  !important; }
+
+/* Layout Utilities */
+.u-flex            { display: flex !important; }
+.u-flex-center     { display: flex; align-items: center; justify-content: center; }
+.u-grid            { display: grid !important; }
+.u-overflow-x-auto { overflow-x: auto !important; }
+
+/* Borders & Radius Utilities */
+.u-radius-sm { border-radius: var(--radius-sm) !important; }
+.u-radius-md { border-radius: var(--radius-md) !important; }
+
+/* Interaction Utilities */
+.u-cursor-pointer { cursor: pointer !important; }
+
+/* Typography Utilities */
+.u-text-sm      { font-size: var(--font-size-sm) !important; }
+.u-text-primary { color: var(--color-primary) !important; }
+
+/* Miscellaneous Utilities */
+.u-truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

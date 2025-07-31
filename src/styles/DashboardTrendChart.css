@@ -1,0 +1,9 @@
+.chart-title {
+  font-size: var(--font-size-xl);       
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin-bottom: var(--space-sm);
+}
+.dashboard-trend-chart {
+  margin: var(--space-md) 0;
+}

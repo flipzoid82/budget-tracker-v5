@@ -1,0 +1,49 @@
+/* Container for the dropdown trigger and menu */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Trigger button */
+.dropdown-button {
+  background: none;
+  border: none;
+  padding: var(--space-xxs);
+  cursor: pointer;
+}
+
+/* The menu panel */
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin: 0;
+  margin-top: var(--space-xxs);
+  transform: translateY(-10%);
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  list-style: none;
+  padding: var(--space-xxs) 0;
+  z-index: 10;
+  width: max-content; /* size to content */
+}
+
+/* Individual menu items */
+.dropdown-item {
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Hover state for menu items */
+.dropdown-item:hover {
+  background: var(--hover-bg);
+}
+
+/* Icon sizing inside the button */
+.dropdown-button svg {
+  width: var(--font-size-base);
+  height: var(--font-size-base);
+}

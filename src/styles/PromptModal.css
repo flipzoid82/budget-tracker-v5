@@ -1,0 +1,73 @@
+/* Full-screen semi-opaque backdrop */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+}
+
+/* Centered modal box */
+.modal-content {
+  background: var(--color-surface);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  max-width: var(--modal-max-width);
+  width: 90%;
+  box-shadow: var(--modal-shadow-sm);
+}
+
+/* Title */
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-xl);
+}
+
+/* Form layout */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Label + input pairing */
+.modal-content label {
+  display: flex;
+  flex-direction: column;
+  font-weight: var(--font-weight-bold);
+}
+
+.modal-content input {
+  margin-top: var(--space-xxs);
+  padding: var(--space-xs);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+/* Action buttons at bottom */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+/* Highlight the label and input/select when there’s an error */
+.has-error input,
+.has-error select {
+  border-color: var(--color-error);
+}
+
+/* The error message under each field */
+.input-error {
+  color: var(--color-error);
+  font-size: var(--font-size-xs);
+  margin-top: var(--space-xxs);
+}
